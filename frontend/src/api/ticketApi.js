@@ -7,20 +7,19 @@ export const createTicket = async (data) => {
     body: JSON.stringify(data),
   });
   const responce = await res.json()
-  console.log(responce)
   return responce
 }
 
 export const getTickets = async () => {
   const res = await fetch(`${BASE_URL}/tickets`)
   const responce = await res.json()
-  return responce.tickets
+  return responce
 };
 
 export const getTicket = async (id) => {
   const res = await fetch(`${BASE_URL}/tickets/${id}`)
   const responce = await res.json()
-  return responce.ticket
+  return responce
 };
 
 export const updateStatus = async (id, status) => {

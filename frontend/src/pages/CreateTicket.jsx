@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createTicket } from "../api/ticketApi";
 import { useNavigate } from "react-router-dom";
+  import { toast } from 'react-toastify';
 
 export default function CreateTicket() {
   const [form, setForm] = useState({
@@ -16,10 +17,15 @@ export default function CreateTicket() {
     e.preventDefault()
     setLoading(true)
 
-    await createTicket(form)
+    const data = await createTicket(form)
+    if(data.success){
+      toast.success(data.message)
+    }
+    else{
+      toast.error(data.message)
+    }
 
     setLoading(false)
-    alert("Ticket Created Successfully!")
     navigate("/")
   }
 

@@ -1,12 +1,22 @@
 import { useEffect, useState } from "react";
 import { getTickets } from "../api/ticketApi";
 import { Link } from "react-router-dom";
+  import { toast } from 'react-toastify';
 
 export default function Dashboard() {
   const [tickets, setTickets] = useState([])
 
+  const fetchTickets = async () => {
+    const data = await getTickets()
+    if(!data.success){
+      toast.error(data.message)
+      return
+    }
+
+    setTickets(data.tickets)
+  }
   useEffect(() => {
-    getTickets().then(setTickets)
+    fetchTickets()
   }, []);
 
   return (
@@ -25,10 +35,9 @@ export default function Dashboard() {
               {t.description.slice(0, 60)}...
             </p>
 
-            {/* Badges */}
             <div className="flex items-center justify-between">
               <div className="flex gap-2">
-                {/* Category */}
+               
                 <span
                   className={`px-3 py-1 text-xs rounded-full font-semibold ${
                     t.category === "PAYMENT"
@@ -43,7 +52,6 @@ export default function Dashboard() {
                   {t.category}
                 </span>
 
-                {/* Status */}
                 <span
                   className={`px-3 py-1 text-xs rounded-full font-semibold ${
                     t.status === "OPEN"
@@ -55,7 +63,6 @@ export default function Dashboard() {
                 </span>
               </div>
 
-              {/* Date */}
               <span className="text-xs text-gray-500">
                 {new Date(t.createdAt).toLocaleString()}
               </span>

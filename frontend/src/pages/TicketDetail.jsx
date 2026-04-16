@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getTicket, updateStatus, updateReply } from "../api/ticketApi";
+import { toast } from 'react-toastify';
 
 export default function TicketDetail() {
   const { id } = useParams()
@@ -8,9 +9,33 @@ export default function TicketDetail() {
   const [reply, setReply] = useState("")
 
   const fetchTicket = async () => {
-    const res = await getTicket(id)
-    setTicket(res);
-      setReply(res.aiReply || "")
+    const data = await getTicket(id)
+    if(!data.success){
+      toast.error(data.message)
+    }
+    setTicket(data.ticket);
+    setReply(data.ticket.aiReply || "")
+  }
+
+  const updateTiketReply = async () => {
+    const res = await updateReply(id, reply)
+    if(res.success){
+      toast.success(res.message)
+      fetchTicket()
+    }
+    else{
+      toast.error(res.message)
+    }
+  }
+  const updateTiketStatus = async () => {
+    const res = await updateStatus(id, "RESOLVED")
+    if(res.success){
+      toast.success(res.message)
+      fetchTicket()
+    }
+    else{
+      toast.error(res.message)
+    }
   }
 
   useEffect(() => {
@@ -73,7 +98,6 @@ export default function TicketDetail() {
           </span>
         </div>
 
-        {/* AI Reply */}
         <div className="mb-4">
           <h2 className="font-semibold mb-1">AI Suggested Reply</h2>
           <textarea
@@ -84,12 +108,10 @@ export default function TicketDetail() {
           />
         </div>
 
-        {/* Actions */}
         <div className="flex gap-3">
           <button
             onClick={() => {
-              updateReply(id, reply)
-              fetchTicket()
+              updateTiketReply()
             } }
             className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
           >
@@ -98,8 +120,7 @@ export default function TicketDetail() {
 
           <button
             onClick={() => {
-              updateStatus(id, "RESOLVED")
-              fetchTicket()
+              updateTiketStatus()
             }}
             className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
           >
