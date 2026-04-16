@@ -6,17 +6,21 @@ export const createTicket = async (data) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  return await res.json();
+  const responce = await res.json()
+  console.log(responce)
+  return responce
 }
 
 export const getTickets = async () => {
   const res = await fetch(`${BASE_URL}/tickets`)
-  return await res.json()
+  const responce = await res.json()
+  return responce.tickets
 };
 
 export const getTicket = async (id) => {
   const res = await fetch(`${BASE_URL}/tickets/${id}`)
-  return await res.json()
+  const responce = await res.json()
+  return responce.ticket
 };
 
 export const updateStatus = async (id, status) => {
@@ -25,7 +29,8 @@ export const updateStatus = async (id, status) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ status }),
   });
-  return await res.json()
+  const responce = await res.json()
+  return responce
 };
 
 export const updateReply = async (id, reply) => {
@@ -34,5 +39,6 @@ export const updateReply = async (id, reply) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ reply }),
   });
-  return await res.json()
+  const responce = await res.json()
+  return responce
 };
