@@ -4,7 +4,8 @@ const  processWithAI  = require('../services/aiService.js')
 const createTicket = async (req, res) => {
   const { name, email, description } = req.body
 
-  const aiData = await processWithAI(description)
+  try {
+    const aiData = await processWithAI(description)
 
   const ticket = await Ticket.create({
     name,
@@ -15,31 +16,64 @@ const createTicket = async (req, res) => {
     confidence: aiData.confidence
   })
 
-  res.json({ ticketId: ticket._id, status: ticket.status })
+  res.status(201).json({ 
+    ticketId: ticket._id, 
+    status: ticket.status 
+  })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
 }
 
 const getTickets = async (req, res) => {
-  const tickets = await Ticket.find().select({ _id: 1, description: 1, status: 1, category: 1, createdAt:1 }).sort({ createdAt: -1 })
-  res.json(tickets)
+  try {
+    const tickets = await Ticket.find().select({ _id: 1, description: 1, status: 1, category: 1, createdAt:1 }).sort({ createdAt: -1 })
+  res.status(200).json(tickets)
+  } catch (error) {
+    res.status(500).json({
+      error : error.message
+    })
+  }
 }
 
 const getTicket = async (req, res) => {
-  const ticket = await Ticket.findById(req.params.id).select({ _id: 1, name:1, email:1, description: 1, category:1, aiReply:1, status: 1, createdAt:1 })
-  res.json(ticket)
+  try {
+    const ticket = await Ticket.findById(req.params.id).select({ _id: 1, name:1, email:1, description: 1, category:1, aiReply:1, status: 1, createdAt:1 })
+  res.status(200).json(ticket)
+  } catch (error) {
+    res.status(500).json({
+      error : error.message
+    })
+  }
 }
 
 const updateStatus = async (req, res) => {
-  await Ticket.findByIdAndUpdate(req.params.id, {
+  try {
+    await Ticket.findByIdAndUpdate(req.params.id, {
     status: req.body.status
   })
-  res.json({ success: true })
+  res.status(200).json({ success: true })
+  } catch (error) {
+    res.status(500).json({
+      error : error.message
+    })
+  }
 }
 
 const updateReply = async (req, res) => {
-  await Ticket.findByIdAndUpdate(req.params.id, {
+  try {
+    await Ticket.findByIdAndUpdate(req.params.id, {
     aiReply: req.body.reply
   })
-  res.json({ success: true })
+  res.status(200).json({ success: true })
+  } catch (error) {
+    res.status(500).json({
+      error : error.message
+    })
+  }
 }
 
 module.exports = {createTicket, getTickets, getTicket, updateStatus, updateReply}
