@@ -1,4 +1,6 @@
 const express = require('express')
+const connectDB = require("./config/db.js");
+connectDB()
 const cors = require('cors')
 const ticketRoutes = require('./routes/ticketRoutes.js')
 

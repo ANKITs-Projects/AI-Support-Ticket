@@ -1,11 +1,11 @@
 require("dotenv").config();
 
 const app = require("./app");
-const connectDB = require("./config/db.js");
+// const connectDB = require("./config/db.js");
 
 const startServer = async () => {
   try {
-    await connectDB(); // ✅ WAIT for DB
+    // await connectDB(); // ✅ WAIT for DB
 
     const port = process.env.PORT || 5000;
 
