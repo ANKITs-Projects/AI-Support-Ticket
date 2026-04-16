@@ -34,15 +34,12 @@ export default function CreateTicket() {
       
       <div className="bg-white w-full max-w-md p-6 rounded-2xl shadow-md">
         
-        {/* Heading */}
         <h1 className="text-2xl font-bold mb-6 text-center">
           Create Support Ticket
         </h1>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           
-          {/* Name */}
           <div>
             <label className="text-sm font-medium text-gray-600">
               Name
@@ -58,7 +55,6 @@ export default function CreateTicket() {
             />
           </div>
 
-          {/* Email */}
           <div>
             <label className="text-sm font-medium text-gray-600">
               Email
@@ -74,7 +70,6 @@ export default function CreateTicket() {
             />
           </div>
 
-          {/* Description */}
           <div>
             <label className="text-sm font-medium text-gray-600">
               Issue Description
@@ -90,7 +85,6 @@ export default function CreateTicket() {
             />
           </div>
 
-          {/* Button */}
           <button
             type="submit"
             disabled={loading}

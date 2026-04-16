@@ -30,7 +30,7 @@ export default function Dashboard() {
             key={t._id}
             className="bg-white p-5 rounded-2xl shadow hover:shadow-lg transition"
           >
-            {/* Description */}
+            
             <p className="text-gray-800 font-medium mb-2">
               {t.description.slice(0, 60)}...
             </p>
