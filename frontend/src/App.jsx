@@ -9,15 +9,19 @@ import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
-    <BrowserRouter>
+    <div className="h-screen w-screen bg-gray-100 flex flex-col items-center overflow-hidden">
+      <BrowserRouter>
     <ToastContainer position="top-center"/>
     <Header />
+        <div className="flex-1 w-[80%]  overflow-hidden">
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/create" element={<CreateTicket />} />
         <Route path="/ticket/:id" element={<TicketDetail />} />
       </Routes>
+        </div>
     </BrowserRouter>
+    </div>
   )
 }
 

@@ -30,7 +30,7 @@ export default function CreateTicket() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+    <div className="h-full flex items-center justify-center p-4">
       
       <div className="bg-white w-full max-w-md p-6 rounded-2xl shadow-md">
         

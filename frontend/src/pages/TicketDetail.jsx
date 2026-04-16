@@ -47,13 +47,11 @@ export default function TicketDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="h-full p-6">
       <div className="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow">
 
-        {/* Header */}
         <h1 className="text-2xl font-bold mb-4">Ticket Detail</h1>
 
-        {/* User Info */}
         <div className="mb-4">
           <p className="text-sm text-gray-600">
             <span className="font-semibold">Name:</span> {ticket.name}
@@ -63,7 +61,6 @@ export default function TicketDetail() {
           </p>
         </div>
 
-        {/* Description */}
         <div className="mb-4">
           <h2 className="font-semibold mb-1">Issue</h2>
           <p className="text-gray-800 bg-gray-50 p-3 rounded-lg">
@@ -71,7 +68,6 @@ export default function TicketDetail() {
           </p>
         </div>
 
-        {/* Badges */}
         <div className="flex gap-2 mb-4">
           <span
             className={`px-3 py-1 text-xs rounded-full font-semibold ${
@@ -128,7 +124,6 @@ export default function TicketDetail() {
           </button>
         </div>
 
-        {/* Created Time */}
         <p className="text-xs text-gray-400 mt-4">
           Created at: {new Date(ticket.createdAt).toLocaleString()}
         </p>

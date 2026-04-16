@@ -20,7 +20,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="h-full p-6 overflow-y-auto no-scrollbar">
       <h1 className="text-2xl font-bold mb-6">Support Tickets</h1>
 
       <div className="grid gap-4">

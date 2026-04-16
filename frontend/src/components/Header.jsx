@@ -11,15 +11,13 @@ export default function Header() {
     }`;
 
   return (
-    <header className="bg-white shadow sticky top-0 z-50">
+    <header className="w-full bg-white shadow sticky top-0 z-50">
       <div className="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
         
-        {/* Logo / App Name */}
         <h1 className="text-xl font-bold text-blue-600">
           AI Support Desk
         </h1>
 
-        {/* Navigation */}
         <nav className="flex gap-2">
           <Link to="/" className={linkStyle("/")}>
             Dashboard

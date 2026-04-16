@@ -6,7 +6,6 @@ const createTicket = async (req, res) => {
 
   try {
     const aiData = await processWithAI(description);
-    console.log(aiData)
     const ticket = await Ticket.create({
       name,
       email,
