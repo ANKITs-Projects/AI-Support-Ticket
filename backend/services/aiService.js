@@ -1,42 +1,36 @@
-const OpenAI = require("openai");
-console.log(process.env.OPENAI_API_KEY)
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const { GoogleGenAI } = require("@google/genai");
 
-const processWithAI = async (description) => {
+// The client gets the API key from the environment variable `GEMINI_API_KEY`.
+const ai = new GoogleGenAI({});
+
+async function processWithAI(description) {
   try {
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        {
-          role: "system",
-          content: "You are a support ticket classifier",
-        },
-        {
-          role: "user",
-          content: `
-Categorize into PAYMENT, LOGIN, BUG, OTHER.
-Return JSON with category, reply, confidence.
-
-Ticket: ${description}
-`,
-        },
-      ],
+    const content = `
+                    Categorize into PAYMENT, LOGIN, BUG, OTHER.
+                    Return JSON with category, reply.
+                    Ticket: ${description}
+                    `;
+    const response = await ai.models.generateContent({
+      model: "gemini-3-flash-preview",
+      contents: content,
     });
+    const rawText = response.text;
 
-    const text = response.choices[0].message.content;
+    // Remove ```json and ``` if present
+    const cleanText = rawText
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
 
-    return JSON.parse(text);
+    const parsedData = JSON.parse(cleanText);
+
+    return parsedData;
   } catch (error) {
-    console.log(error)
     return {
       category: "OTHER",
       reply: "We will get back to you shortly.",
-      confidence: 0.5,
     };
   }
-};
+}
 
-
-module.exports = processWithAI
+module.exports = processWithAI;

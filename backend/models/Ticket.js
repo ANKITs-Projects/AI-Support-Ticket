@@ -1,19 +1,34 @@
-const mongoose = require('mongoose') 
+const mongoose = require('mongoose');
 
 const ticketSchema = new mongoose.Schema(
   {
-    name: String,
-    email: String,
-    description: String,
-    category: String,
-    aiReply: String,
-    confidence: Number,
+    name: {
+      type: String,
+      require: true
+    },
+    email: {
+      type: String,
+      require: true
+    },
+    description: {
+      type: String,
+      require: true
+    },
+    category: {
+      type: String,
+      require: true
+    },
+    aiReply: {
+      type: String,
+      require: true
+    },
     status: {
       type: String,
+      enum: ["OPEN", "RESOLVED"],
       default: "OPEN"
     }
   },
   { timestamps: true }
-)
+);
 
 module.exports = mongoose.model("Ticket", ticketSchema);
