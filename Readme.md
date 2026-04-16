@@ -35,7 +35,7 @@ A full-stack web application where users can submit support tickets and an AI sy
 
 **AI Integration:**
 
-* Google Gemini API (with fallback logic)
+* OpenAi API (with fallback logic)
 
 ---
 
@@ -60,10 +60,9 @@ npm install
 Create a `.env` file inside `backend/`:
 
 ```env
-PORT=5000
+PORT=8080
 MONGO_URI=your_mongodb_connection_string
-GEMINI_API_KEY=your_gemini_api_key
-GEMINI_MODEL=gemini-1.5-flash
+OPENAI_API_KEY=your_openAi_api_key
 ```
 
 Start backend:
@@ -82,11 +81,17 @@ npm install
 npm run dev
 ```
 
+Create a `.env` file inside `frontend/`:
+
+```env
+VITE_BACKEND_URL=http://localhost:8080
+```
+
 ---
 
 ## ▶️ How to Run Locally
 
-1. Start backend server → runs on `http://localhost:5000`
+1. Start backend server → runs on `http://localhost:8080`
 2. Start frontend → runs on `http://localhost:5173`
 3. Open browser and use the app
 
@@ -123,36 +128,6 @@ Example:
 
 ---
 
-## 🔥 Future Improvements
-
-* User authentication (Admin/User roles)
-* Ticket priority (HIGH / MEDIUM / LOW)
-* Pagination & search filters
-* Real-time updates (WebSockets)
-* Better AI accuracy with fine-tuned prompts
-* Toast notifications & better UX
-
----
-
-## 📷 Screens (Optional)
-
-*Add screenshots here for better presentation*
-
----
-
-## 📦 Deployment
-
-* Frontend: Vercel / Netlify
-* Backend: Render / Railway / Cyclic
-* Database: MongoDB Atlas
-
----
-
-## 👨‍💻 Author
-
-**Ankit Gupta**
-
----
 
 ## ✅ Status
 
