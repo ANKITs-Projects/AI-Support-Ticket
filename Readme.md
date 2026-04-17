@@ -35,7 +35,7 @@ A full-stack web application where users can submit support tickets and an AI sy
 
 **AI Integration:**
 
-* OpenAi API (with fallback logic)
+* GeminiAI (with fallback logic)
 
 ---
 
@@ -78,7 +78,6 @@ npm run dev
 ```bash
 cd frontend
 npm install
-npm run dev
 ```
 
 Create a `.env` file inside `frontend/`:
@@ -86,7 +85,11 @@ Create a `.env` file inside `frontend/`:
 ```env
 VITE_BACKEND_URL=http://localhost:8080
 ```
+Start frontend:
 
+```bash
+npm run dev
+```
 ---
 
 ## ▶️ How to Run Locally
@@ -99,8 +102,8 @@ VITE_BACKEND_URL=http://localhost:8080
 
 ## 🌐 Hosted URL
 
-👉 Frontend: *Add your deployed URL here*
-👉 Backend: *Add your deployed API URL here*
+👉 Frontend: `https://ai-support-ticket-xqtk.vercel.app/`
+👉 Backend: `https://ai-support-ticket.vercel.app/`
 
 ---
 
@@ -111,8 +114,7 @@ Example:
 ```json
 {
   "category": "PAYMENT",
-  "reply": "We’re sorry for the inconvenience. Please share your transaction details.",
-  "confidence": 0.92
+  "reply": "We’re sorry for the inconvenience. Please share your transaction details."
 }
 ```
 
@@ -121,9 +123,9 @@ Example:
 ## ⚠️ Assumptions Made
 
 * AI responses may fail due to API limits, so fallback logic is implemented
-* No authentication system (single-user/admin usage)
-* Tickets are managed in a simple dashboard (no pagination)
-* AI categorization is based on prompt engineering and may not always be 100% accurate
+* No authentication system 
+* Tickets are managed in a simple dashboard
+* AI categorization is based on prompt engineering
 * UI is kept minimal as per assignment requirements
 
 ---
