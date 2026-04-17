@@ -2,19 +2,24 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getTicket, updateStatus, updateReply } from "../api/ticketApi";
 import { toast } from 'react-toastify';
+import { HashLoader } from "react-spinners";
 
 export default function TicketDetail() {
   const { id } = useParams()
   const [ticket, setTicket] = useState(null)
   const [reply, setReply] = useState("")
+  const [loading, setLoading] = useState(true)
 
   const fetchTicket = async () => {
+     setLoading(true)
     const data = await getTicket(id)
     if(!data.success){
       toast.error(data.message)
+       setLoading(false)
     }
     setTicket(data.ticket);
     setReply(data.ticket.aiReply || "")
+    setLoading(false)
   }
 
   const updateTiketReply = async () => {
@@ -42,8 +47,18 @@ export default function TicketDetail() {
     fetchTicket()
   }, [id])
 
-  if (!ticket) {
-    return <div className="p-6">Loading...</div>
+  if(loading){
+    return (
+    <div className="h-full w-full flex justify-center items-center">     
+      <HashLoader 
+        color={"#2b7fff"}
+        loading={loading}
+        size={100}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+    </div>
+  );
   }
 
   return (

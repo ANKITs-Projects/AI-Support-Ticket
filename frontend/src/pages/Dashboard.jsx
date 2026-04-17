@@ -1,23 +1,42 @@
 import { useEffect, useState } from "react";
 import { getTickets } from "../api/ticketApi";
 import { Link } from "react-router-dom";
-  import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+import { HashLoader  } from "react-spinners";
 
 export default function Dashboard() {
   const [tickets, setTickets] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const fetchTickets = async () => {
+    setLoading(true)
     const data = await getTickets()
     if(!data.success){
+      setLoading(false)
       toast.error(data.message)
       return
     }
 
     setTickets(data.tickets)
+    setLoading(false)
   }
   useEffect(() => {
     fetchTickets()
   }, []);
+
+  if(loading){
+    return (
+    <div className="h-full w-full flex justify-center items-center">     
+      <HashLoader 
+        color={"#2b7fff"}
+        loading={loading}
+        size={100}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+    </div>
+  );
+  }
 
   return (
     <div className="h-full p-6 overflow-y-auto no-scrollbar">
