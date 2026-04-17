@@ -62,7 +62,7 @@ Create a `.env` file inside `backend/`:
 ```env
 PORT=8080
 MONGO_URI=your_mongodb_connection_string
-OPENAI_API_KEY=your_openAi_api_key
+GEMINI_API_KEY=your_GEMINI_API_KEY
 ```
 
 Start backend:
